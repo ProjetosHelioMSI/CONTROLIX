@@ -29,7 +29,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('update bomba set desc_bomba = :desc_bomba, tanque_bomba = :tanque_bomba, combustivel_bomba = :combustivel_bomba where (id_bomba = :id_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel, objBomba.ID]);
+    try
+      VQry.ExecSQL('update bomba set desc_bomba = :desc_bomba, tanque_bomba = :tanque_bomba, combustivel_bomba = :combustivel_bomba where (id_bomba = :id_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel, objBomba.ID]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -46,7 +50,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('delete from bomba where (id_bomba = :id_bomba)', [objBomba.ID]);
+    try
+      VQry.ExecSQL('delete from bomba where (id_bomba = :id_bomba)', [objBomba.ID]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -58,7 +66,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into bomba (desc_bomba, tanque_bomba, combustivel_bomba) values (:desc_bomba, :tanque_bomba, :combustivel_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel]);
+    try
+      VQry.ExecSQL('insert into bomba (desc_bomba, tanque_bomba, combustivel_bomba) values (:desc_bomba, :tanque_bomba, :combustivel_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;

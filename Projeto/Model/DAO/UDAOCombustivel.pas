@@ -29,7 +29,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('update combustivel set desc_combustivel = :desc_combustivel, preco_combustivel = :preco_combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco, objCombustivel.ID]);
+    try
+      VQry.ExecSQL('update combustivel set desc_combustivel = :desc_combustivel, preco_combustivel = :preco_combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco, objCombustivel.ID]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -46,7 +50,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('delete from combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.ID]);
+    try
+      VQry.ExecSQL('delete from combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.ID]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -58,7 +66,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into combustivel (desc_combustivel, preco_combustivel) values (:desc_combustivel, :preco_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco]);
+    try
+      VQry.ExecSQL('insert into combustivel (desc_combustivel, preco_combustivel) values (:desc_combustivel, :preco_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco]);
+    except
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;

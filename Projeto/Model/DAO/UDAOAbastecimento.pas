@@ -29,11 +29,20 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('update abastecimento set ' +
-                 'data_abastecimento = :data_abastecimento, litros_abastecimento = :litros_abastecimento, '+
-                 'valor_abastecimento = :valor_abastecimento, imposto_abastecimento = :imposto_abastecimento, '+
-                 'bomba_abastecimento = :bomba_abastecimento where (id_abastecimento = :id_abastecimento)',
-                 [objAbastecimento.DataHora, objAbastecimento.Litros, objAbastecimento.Valor, objAbastecimento.Bomba, objAbastecimento.Imposto, objAbastecimento.ID]);
+    try
+      VQry.ExecSQL('update abastecimento set ' +
+                   'data_abastecimento = :data_abastecimento, litros_abastecimento = :litros_abastecimento, '+
+                   'valor_abastecimento = :valor_abastecimento, imposto_abastecimento = :imposto_abastecimento, '+
+                   'bomba_abastecimento = :bomba_abastecimento where (id_abastecimento = :id_abastecimento)',
+                   [objAbastecimento.DataHora, 
+                    objAbastecimento.Litros, 
+                    objAbastecimento.Valor, 
+                    objAbastecimento.Imposto, 
+                    objAbastecimento.Bomba, 
+                    objAbastecimento.ID]);
+    except 
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -50,7 +59,11 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('delete from abastecimento where (id_abastecimento = :id_abastecimento)', [objAbastecimento.ID]);
+    try
+      VQry.ExecSQL('delete from abastecimento where (id_abastecimento = :id_abastecimento)', [objAbastecimento.ID]);
+    except 
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;
@@ -62,7 +75,17 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into abastecimento (data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento) values (:data_abastecimento, :litros_abastecimento, :valor_abastecimento, :imposto_abastecimento, :bomba_abastecimento)', [objAbastecimento.DataHora, objAbastecimento.Litros, objAbastecimento.Valor, objAbastecimento.Bomba, objAbastecimento.Imposto, objAbastecimento.ID]);
+    try
+      VQry.ExecSQL('insert into abastecimento (data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento) '+
+                   'values (:data_abastecimento, :litros_abastecimento, :valor_abastecimento, :imposto_abastecimento, :bomba_abastecimento)', 
+                   [objAbastecimento.DataHora, 
+                    objAbastecimento.Litros, 
+                    objAbastecimento.Valor, 
+                    objAbastecimento.Imposto, 
+                    objAbastecimento.Bomba]);
+    except 
+      raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
     Result := True;
   finally
     VQry.Free;

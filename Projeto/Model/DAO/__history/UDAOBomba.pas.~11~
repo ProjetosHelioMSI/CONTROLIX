@@ -1,0 +1,78 @@
+unit uDAOBomba;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexaoBD, System.SysUtils, UClasseBomba;
+
+type
+  TDAOBomba = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Incluir(objBomba: TBomba): Boolean;
+    function Alterar(objBomba: TBomba): Boolean;
+    function Excluir(objBomba: TBomba): Boolean;
+    function Consultar: TFDQuery;
+  end;
+
+implementation
+
+{ TClienteDao }
+
+uses uControllerSistema;
+
+function TDAOBomba.Alterar(objBomba: TBomba): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('update bomba set desc_bomba = :desc_bomba, tanque_bomba = :tanque_bomba, combustivel_bomba = :combustivel_bomba where (id_bomba = :id_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel, objBomba.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+constructor TDAOBomba.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TDAOBomba.Excluir(objBomba: TBomba): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from bomba where (id_bomba = :id_bomba)', [objBomba.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOBomba.Incluir(objBomba: TBomba): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into bomba (desc_bomba, tanque_bomba, combustivel_bomba) values (:desc_bomba, :tanque_bomba, :combustivel_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOBomba.Consultar: TFDQuery;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  VQry.Open('select id_bomba, desc_bomba, tanque_bomba, combustivel_bomba from bomba order by 1');
+  Result := VQry;
+end;
+
+end.
+
+

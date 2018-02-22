@@ -55,7 +55,7 @@ begin
   objClasse := TAbastecimento.Create;
   objControle := TControleAbastecimento.Create;
   try
-    objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
+    objClasse.ID := DMBanco.FDQAbastecimentoID_ABASTECIMENTO.AsInteger;
     objClasse.DataHora := DTPDataHora.DateTime;
     objClasse.Litros := cxCEQtd.Value;
     objClasse.Valor := cxCEValor.Value;

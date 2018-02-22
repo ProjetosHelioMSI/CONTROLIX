@@ -43,7 +43,7 @@ begin
   objClasse := TBomba.Create;
   objControle := TControleBomba.Create;
   try
-    objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
+    objClasse.ID := DMBanco.FDQBombaID_BOMBA.AsInteger;
     objClasse.Descricao := Trim(EDesc.Text);
     objClasse.Tanque := StrToIntDef(ETanque.Text,0);
     objClasse.Combustivel := DBLCBTipoComb.KeyValue;

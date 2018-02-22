@@ -53,6 +53,7 @@ begin
   finally
     FreeAndNil(objClasse);
     FreeAndNil(objControle);
+
     DMBanco.FDQCombustivel.Refresh;
   end;
 

@@ -1,0 +1,87 @@
+unit uDAOAbastecimento;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexaoBD, System.SysUtils, UClasseAbastecimento;
+
+type
+  TDAOAbastecimento = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Incluir(objAbastecimento: TAbastecimento): Boolean;
+    function Alterar(objAbastecimento: TAbastecimento): Boolean;
+    function Excluir(objAbastecimento: TAbastecimento): Boolean;
+    function Consultar: TFDQuery;
+  end;
+
+implementation
+
+{ TClienteDao }
+
+uses uControllerSistema;
+
+function TDAOAbastecimento.Alterar(objAbastecimento: TAbastecimento): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    try
+
+    except on E: Exception do
+       raise Exception.Create('Operação não Efetuada! Entrar em contato Suporte.');
+    end;
+    VQry.ExecSQL('update abastecimento set ' +
+                 'data_abastecimento = :data_abastecimento, litros_abastecimento = :litros_abastecimento, '+
+                 'valor_abastecimento = :valor_abastecimento, imposto_abastecimento = :imposto_abastecimento, '+
+                 'bomba_abastecimento = :bomba_abastecimento where (id_abastecimento = :id_abastecimento)',
+                 [objAbastecimento.DataHora, objAbastecimento.Litros, objAbastecimento.Valor, objAbastecimento.Bomba, objAbastecimento.Imposto, objAbastecimento.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+constructor TDAOAbastecimento.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TDAOAbastecimento.Excluir(objAbastecimento: TAbastecimento): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from abastecimento where (id_abastecimento = :id_abastecimento)', [objAbastecimento.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOAbastecimento.Incluir(objAbastecimento: TAbastecimento): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into abastecimento (data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento) values (:data_abastecimento, :litros_abastecimento, :valor_abastecimento, :imposto_abastecimento, :bomba_abastecimento)', [objAbastecimento.DataHora, objAbastecimento.Litros, objAbastecimento.Valor, objAbastecimento.Bomba, objAbastecimento.Imposto, objAbastecimento.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOAbastecimento.Consultar: TFDQuery;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  VQry.Open('select id_abastecimento, data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento from abastecimento order by 1');
+  Result := VQry;
+end;
+
+end.
+
+
