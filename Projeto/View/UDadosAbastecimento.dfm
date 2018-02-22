@@ -100,6 +100,7 @@ inherited FDadosAbastecimento: TFDadosAbastecimento
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      OnClick = BBOKClick
       ExplicitLeft = 418
     end
     inherited BBCancelar: TBitBtn

@@ -2,6 +2,8 @@ unit UClasseAbastecimento;
 
 interface
 
+uses UEnumerado;
+
 type
    TAbastecimento = class
 
@@ -13,6 +15,7 @@ type
      AValor : Double;
      ABomba : ShortInt;
      AImposto : Double;
+     FAcao: TAcao;
 
    public
      //Metódos Públicos
@@ -25,6 +28,7 @@ type
      property Valor: Double read AValor write AValor;
      property Bomba: ShortInt read ABomba write ABomba;
      property Imposto: Double read AImposto write AImposto;
+     property Acao: TAcao read FAcao write FAcao;
    end;
 
 implementation

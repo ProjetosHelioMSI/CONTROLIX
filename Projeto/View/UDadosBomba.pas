@@ -45,7 +45,7 @@ begin
   try
     objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
     objClasse.Descricao := Trim(EDesc.Text);
-    objClasse.Tanque := ETanque.Text;
+    objClasse.Tanque := StrToIntDef(ETanque.Text,0);
     objClasse.Combustivel := DBLCBTipoComb.KeyValue;
     case DMBanco.pOperacaoDados of
        1: objClasse.Acao := uEnumerado.tacInc;

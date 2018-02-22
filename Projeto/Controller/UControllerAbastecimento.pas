@@ -10,32 +10,44 @@ type
   private
 
   public
-    procedure Salvar(const objetoCliente: TAbastecimento);
+    //procedimentos publicos pra salvar
+    procedure Salvar(const objetoAbastecimento: TAbastecimento);
 
   end;
 
 implementation
 
 uses
-  StrUtils, SysUtils;
+  StrUtils, SysUtils, UEnumerado;
 
-{ TControleCombustivel }
+{ TControleAbastecimento }
 
-procedure TControleAbastecimento.Salvar(const objetoCliente: TAbastecimento);
+procedure TControleAbastecimento.Salvar(const objetoAbastecimento: TAbastecimento);
 var
   objetoDAOAbastecimento : TDAOAbastecimento;
 begin
   objetoDAOAbastecimento := TDAOAbastecimento.Create;
   try
-    if objetoCliente.DataHora = 0 Then
+    {utilizei exceções para abortar a instrução mas correto um tratamento utilizando try..except, mais amigável.}
+    if objetoAbastecimento.DataHora = 0 Then
        raise Exception.Create('Preencha a Data/Hora de Abastecimento!');
-    if objetoCliente.Litros = 0 then
+    if objetoAbastecimento.Litros = 0 then
        raise Exception.Create('Preencha quanto Litros de Abastecimento!');
 
-    objetoDAOAbastecimento.Salvar(objetoCliente);
+    case objetoAbastecimento.Acao of
+      uEnumerado.tacInc: objetoDAOAbastecimento.Incluir(objetoAbastecimento);
+      uEnumerado.tacAlt: objetoDAOAbastecimento.Alterar(objetoAbastecimento);
+      uEnumerado.tacExc: objetoDAOAbastecimento.Excluir(objetoAbastecimento);
+    end;
+
   finally
     FreeAndNil(objetoDAOAbastecimento);
   end;
 end;
 
 end.
+
+
+
+
+

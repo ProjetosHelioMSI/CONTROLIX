@@ -2,7 +2,7 @@ unit UClasseBomba;
 
 interface
 
-uses UClasseCombustivel, UEnumerado;
+uses UEnumerado;
 
 type
    TBomba = class

@@ -30,6 +30,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxCEQtdPropertiesChange(Sender: TObject);
     procedure DBLCBBombaClick(Sender: TObject);
+    procedure BBOKClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,7 +44,37 @@ implementation
 
 {$R *.dfm}
 
-uses UDMBanco;
+uses UDMBanco, UEnumerado, UClasseAbastecimento, UControllerAbastecimento;
+
+procedure TFDadosAbastecimento.BBOKClick(Sender: TObject);
+var objClasse: TAbastecimento;
+    objControle: TControleAbastecimento;
+begin
+  inherited;
+
+  objClasse := TAbastecimento.Create;
+  objControle := TControleAbastecimento.Create;
+  try
+    objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
+    objClasse.DataHora := DTPDataHora.DateTime;
+    objClasse.Litros := cxCEQtd.Value;
+    objClasse.Valor := cxCEValor.Value;
+    objClasse.Bomba := DBLCBBomba.KeyValue;
+    objClasse.Imposto := cxCEImposto.Value;
+    case DMBanco.pOperacaoDados of
+       1: objClasse.Acao := uEnumerado.tacInc;
+       2: objClasse.Acao := uEnumerado.tacAlt;
+       3: objClasse.Acao := uEnumerado.tacExc;
+    end;
+
+    objControle.Salvar(objClasse);
+  finally
+    FreeAndNil(objClasse);
+    FreeAndNil(objControle);
+
+    DMBanco.FDQAbastecimento.Refresh;
+  end;
+end;
 
 procedure TFDadosAbastecimento.cxCEQtdPropertiesChange(Sender: TObject);
 begin
@@ -55,10 +86,10 @@ end;
 procedure TFDadosAbastecimento.DBLCBBombaClick(Sender: TObject);
 begin
   inherited;
-  cxCEPreco.Value := DMBanco.FDQBombaPRECO_COMBUSTIVEL.Value;
+  cxCEPreco.Value := DMBanco.FDQAbastecimentoPRECO_COMBUSTIVEL.Value;
   cxCEValor.Value := cxCEQtd.Value * cxCEPreco.Value;
   cxCEImposto.Value := cxCEValor.Value * DMBanco.pAliquotaIMPOSTO/100;
-  ETipo.Text := DMBanco.FDQBombaDESC_COMBUSTIVEL.AsString;
+  ETipo.Text := DMBanco.FDQAbastecimentoDESC_COMBUSTIVEL.AsString;
 end;
 
 procedure TFDadosAbastecimento.FormClose(Sender: TObject;
@@ -92,7 +123,7 @@ begin
   end
   else
   begin
-    DBLCBBomba.KeyValue := DMBanco.FDQAbastecimentoBOMBA_ABASTECIMENTO.AsInteger;
+    DBLCBBomba.KeyValue := DMBanco.FDQAbastecimentoID_BOMBA.AsInteger;
     DTPDataHora.DateTime := DMBanco.FDQAbastecimentoDATA_ABASTECIMENTO.AsDateTime;
     cxCEQtd.Value := DMBanco.FDQAbastecimentoLITROS_ABASTECIMENTO.AsFloat;
     cxCEValor.Value := DMBanco.FDQAbastecimentoVALOR_ABASTECIMENTO.AsFloat;

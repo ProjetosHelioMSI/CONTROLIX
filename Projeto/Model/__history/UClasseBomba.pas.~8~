@@ -1,0 +1,45 @@
+unit UClasseBomba;
+
+interface
+
+uses UClasseCombustivel, UEnumerado;
+
+type
+   TBomba = class
+
+   private
+     //Atributos da Classe
+     AID : ShortInt;
+     ADescricao : String;
+     ATanque : ShortInt;
+     ACombustivel : ShortInt;
+     FAcao: TAcao;
+
+   public
+     //Metódos Públicos
+     constructor Create;
+
+     //Propriedades (semelhante ao get e set)
+     property ID: ShortInt read AID write AID;
+     property Descricao: string read ADescricao write ADescricao;
+     property Tanque: ShortInt read ATanque write ATanque;
+     property Combustivel: ShortInt read ACombustivel write ACombustivel;
+     property Acao: TAcao read FAcao write FAcao;
+   end;
+
+implementation
+
+uses
+  SysUtils;
+
+{ TBomba }
+
+constructor TBomba.Create;
+begin
+  //Inicialização valores ao objeto
+  ADescricao := '';
+  ATanque := 1;
+end;
+
+end.
+
