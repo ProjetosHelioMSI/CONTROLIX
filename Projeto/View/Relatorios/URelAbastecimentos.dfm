@@ -205,7 +205,7 @@ object FRelAbastecimentos: TFRelAbastecimentos
           Height = 21
           Align = faClient
           Alignment = taCenter
-          Caption = 'Quantidade de Abastecimento'
+          Caption = 'Quantidade Abastecimento'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13

@@ -35,8 +35,8 @@ begin
   with TFRelAbastecimentos.Create(Application) do
   try
     DMBanco.FDQRelAbastecimento.Close;
-    DMBanco.FDQRelAbastecimento.ParamByName('P01').AsDateTime := DTPInicial.DateTime-1;
-    DMBanco.FDQRelAbastecimento.ParamByName('P02').AsDateTime := DTPFinal.DateTime+1;
+    DMBanco.FDQRelAbastecimento.ParamByName('P01').AsDateTime := DTPInicial.DateTime;
+    DMBanco.FDQRelAbastecimento.ParamByName('P02').AsDateTime := DTPFinal.DateTime;
     DMBanco.FDQRelAbastecimento.Open;
     RLLPeriodo.Caption := FormatDateTime('dd/mm/yyyy',DTPInicial.DateTime)+' à '+FormatDateTime('dd/mm/yyyy',DTPFinal.DateTime);
     RLRRelAbastecimentos.PreviewModal;

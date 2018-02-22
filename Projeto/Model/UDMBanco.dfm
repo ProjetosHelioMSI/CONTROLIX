@@ -233,8 +233,8 @@ object DMBanco: TDMBanco
       'WHERE BOMBA_ABASTECIMENTO = ID_BOMBA AND '
       '             COMBUSTIVEL_BOMBA = ID_COMBUSTIVEL AND'
       
-        '             DATA_ABASTECIMENTO >=:P01 AND DATA_ABASTECIMENTO <=' +
-        ':P02'
+        '             CAST(DATA_ABASTECIMENTO AS DATE) >=:P01 AND CAST(DA' +
+        'TA_ABASTECIMENTO AS DATE) <=:P02'
       'GROUP BY 1, 2, 3'
       'ORDER BY 1, 2, 3'
       ''
