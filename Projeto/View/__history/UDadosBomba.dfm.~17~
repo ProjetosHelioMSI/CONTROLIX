@@ -49,7 +49,6 @@ inherited FDadosBomba: TFDadosBomba
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      OnClick = BBOKClick
       ExplicitLeft = 301
     end
     inherited BBCancelar: TBitBtn

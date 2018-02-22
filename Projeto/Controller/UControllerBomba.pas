@@ -8,32 +8,48 @@ type
   TControleBomba = class
 
   private
+    //funções privadas pra validar algo, um código, CPF por exemplo
+    //function ValidarCPF(numCPF: string): boolean;
 
   public
-    procedure Salvar(const objetoCliente: TBomba);
+    //procedimentos publicos pra salvar
+    procedure Salvar(const objetoBomba: TBomba);
 
   end;
 
 implementation
 
 uses
-  StrUtils, SysUtils;
+  StrUtils, SysUtils, UEnumerado;
 
-{ TControleCombustivel }
+{ TControleBomba }
 
-procedure TControleBomba.Salvar(const objetoCliente: TBomba);
+procedure TControleBomba.Salvar(const objetoBomba: TBomba);
 var
   objetoDAOBomba : TDAOBomba;
 begin
   objetoDAOBomba := TDAOBomba.Create;
   try
-    if objetoCliente.Descricao= '' then
-       raise Exception.Create('Preencha a Descrição da Bomba!');
+    {utilizei exceções para abortar a instrução mas correto um tratamento utilizando try..except, mais amigável.}
+    if objetoBomba.Descricao = '' then
+       raise Exception.Create('Informe o Nome da Bomba!');
 
-    objetoDAOBomba.Salvar(objetoCliente);
+    //Exemplo
+    //if not (ValidarCPF(objetoCliente.CPF)) then
+    //   raise Exception.Create('CPF inválido!');
+
+    case objetoBomba.Acao of
+      uEnumerado.tacInc: objetoDAOBomba.Incluir(objetoBomba);
+      uEnumerado.tacAlt: objetoDAOBomba.Alterar(objetoBomba);
+      uEnumerado.tacExc: objetoDAOBomba.Excluir(objetoBomba);
+    end;
+
   finally
     FreeAndNil(objetoDAOBomba);
   end;
 end;
 
 end.
+
+
+

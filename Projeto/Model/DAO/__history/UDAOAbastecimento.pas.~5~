@@ -1,0 +1,84 @@
+unit uDAOCombustivel;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexaoBD, System.SysUtils, UClasseCombustivel;
+
+type
+  TDAOCombustivel = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Incluir(objCombustivel: TCombustivel): Boolean;
+    function Alterar(objCombustivel: TCombustivel): Boolean;
+    function Excluir(objCombustivel: TCombustivel): Boolean;
+    function Consultar: TFDQuery;
+  end;
+
+implementation
+
+{ TClienteDao }
+
+uses uControllerSistema;
+
+function TDAOCombustivel.Alterar(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('update abastecimento set data_abastecimento = :data_abastecimento, litros_abastecimento = :litros_abastecimento, valor_abastecimento = :valor_abastecimento, imposto_abastecimento = :imposto_abastecimento, bomba_abastecimento = :bomba_abastecimento where (id_abastecimento = :id_abastecimento)', [objCombustivel.Descricao, objCombustivel.Tanque, objCombustivel.Combustivel, objCombustivel.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+constructor TDAOCombustivel.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TDAOCombustivel.Excluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from abastecimento where (id_abastecimento = :id_abastecimento)', [objCombustivel.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Incluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into abastecimento (data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento) values (:data_abastecimento, :litros_abastecimento, :valor_abastecimento, :imposto_abastecimento, :bomba_abastecimento)', [objCombustivel.Descricao, objCombustivel.Tanque, objCombustivel.Combustivel]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Consultar: TFDQuery;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  VQry.Open('select id_abastecimento, data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento from abastecimento order by 1');
+  Result := VQry;
+end;
+
+end.
+
+select id_abastecimento, data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento from abastecimento
+
+insert into abastecimento (data_abastecimento, litros_abastecimento, valor_abastecimento, imposto_abastecimento, bomba_abastecimento) values (:data_abastecimento, :litros_abastecimento, :valor_abastecimento, :imposto_abastecimento, :bomba_abastecimento)
+
+update abastecimento set data_abastecimento = :data_abastecimento, litros_abastecimento = :litros_abastecimento, valor_abastecimento = :valor_abastecimento, imposto_abastecimento = :imposto_abastecimento, bomba_abastecimento = :bomba_abastecimento where (id_abastecimento = :id_abastecimento)
+
+delete from abastecimento where (id_abastecimento = :id_abastecimento)

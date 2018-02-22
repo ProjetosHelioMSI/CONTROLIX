@@ -29,7 +29,7 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('update bomba set desc_bomba = :desc_bomba, tanque_bomba = :tanque_bomba, combustivel_bomba = :combustivel_bomba where (id_bomba = :id_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel, objBomba.ID]);
+    VQry.ExecSQL('update Bomba set desc_Bomba = :desc_Bomba, preco_Bomba = :preco_Bomba where (id_Bomba = :id_Bomba)', [objBomba.Descricao, objBomba.Preco, objBomba.ID]);
     Result := True;
   finally
     VQry.Free;
@@ -46,7 +46,7 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('delete from bomba where (id_bomba = :id_bomba)', [objBomba.ID]);
+    VQry.ExecSQL('delete from Bomba where (id_Bomba = :id_Bomba)', [objBomba.ID]);
     Result := True;
   finally
     VQry.Free;
@@ -58,7 +58,7 @@ var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
   try
-    VQry.ExecSQL('insert into bomba (desc_bomba, tanque_bomba, combustivel_bomba) values (:desc_bomba, :tanque_bomba, :combustivel_bomba)', [objBomba.Descricao, objBomba.Tanque, objBomba.Combustivel]);
+    VQry.ExecSQL('insert into Bomba (desc_Bomba, preco_Bomba) values (:desc_Bomba, :preco_Bomba)', [objBomba.Descricao, objBomba.Preco]);
     Result := True;
   finally
     VQry.Free;
@@ -69,10 +69,11 @@ function TDAOBomba.Consultar: TFDQuery;
 var VQry: TFDQuery;
 begin
   VQry := FConexao.CriarQuery();
-  VQry.Open('select id_bomba, desc_bomba, tanque_bomba, combustivel_bomba from bomba order by 1');
+  VQry.Open('select id_Bomba, desc_Bomba, preco_Bomba from Bomba order by 1');
   Result := VQry;
 end;
 
 end.
+
 
 

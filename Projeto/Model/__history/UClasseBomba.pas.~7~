@@ -2,7 +2,7 @@ unit UClasseBomba;
 
 interface
 
-uses UClasseCombustivel, UEnumerado;
+uses UClasseCombustivel;
 
 type
    TBomba = class
@@ -13,7 +13,6 @@ type
      ADescricao : String;
      ATanque : ShortInt;
      ACombustivel : ShortInt;
-     FAcao: TAcao;
 
    public
      //Metódos Públicos
@@ -24,7 +23,6 @@ type
      property Descricao: string read ADescricao write ADescricao;
      property Tanque: ShortInt read ATanque write ATanque;
      property Combustivel: ShortInt read ACombustivel write ACombustivel;
-     property Acao: TAcao read FAcao write FAcao;
    end;
 
 implementation
