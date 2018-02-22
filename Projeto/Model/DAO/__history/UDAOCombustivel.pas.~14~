@@ -1,0 +1,93 @@
+unit uDAOCombustivel;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexaoBD, System.SysUtils, UClasseCombustivel;
+
+type
+  TDAOCombustivel = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
+
+    function Incluir(objCombustivel: TCombustivel): Boolean;
+    function Alterar(objCombustivel: TCombustivel): Boolean;
+    function Excluir(objCombustivel: TCombustivel): Boolean;
+    function GetId(AAutoIncrementar: Integer): Integer;
+    function Obter: TFDQuery;
+  end;
+
+implementation
+
+{ TClienteDao }
+
+uses uSistemaControl;
+
+function TDAOCombustivel.Alterar(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('update cliente set nome = :nome where (codigo = :codigo)', [objCombustivel.Descricao, objCombustivel.Preco]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+constructor TDAOCombustivel.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TDAOCombustivel.Excluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from cliente where (codigo = :codigo)', [AClienteModel.Codigo]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.GetId(AAutoIncrementar: Integer): Integer;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.Open('select gen_id(gen_cliente_id, ' + IntToStr(AAutoIncrementar) + ' ) from rdb$database');
+    try
+      Result := VQry.Fields[0].AsInteger;
+    finally
+      VQry.Close;
+    end;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Incluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into cliente (codigo, nome) values (:codigo, :nome)', [AClienteModel.Codigo, AClienteModel.Nome]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Obter: TFDQuery;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  VQry.Open('select codigo, nome from cliente order by 1');
+  Result := VQry;
+end;
+
+end.

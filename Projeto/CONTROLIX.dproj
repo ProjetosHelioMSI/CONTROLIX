@@ -171,6 +171,8 @@
             <Form>FDadosRelatorioAbastecimento</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Model\UConexaoBD.pas"/>
+        <DCCReference Include="Controller\UControllerSistema.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

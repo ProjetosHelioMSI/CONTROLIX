@@ -26,7 +26,9 @@ uses
   UControllerAbastecimento in 'Controller\UControllerAbastecimento.pas',
   UDadosImposto in 'View\UDadosImposto.pas' {FDadosImposto},
   URelAbastecimentos in 'View\Relatorios\URelAbastecimentos.pas' {FRelAbastecimentos},
-  UDadosRelAbastecimento in 'View\Relatorios\UDadosRelAbastecimento.pas' {FDadosRelatorioAbastecimento};
+  UDadosRelAbastecimento in 'View\Relatorios\UDadosRelAbastecimento.pas' {FDadosRelatorioAbastecimento},
+  UConexaoBD in 'Model\UConexaoBD.pas',
+  UControllerSistema in 'Controller\UControllerSistema.pas';
 
 {$R *.res}
 

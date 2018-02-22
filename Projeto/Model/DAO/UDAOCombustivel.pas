@@ -1,26 +1,79 @@
-unit UDAOCombustivel;
+unit uDAOCombustivel;
 
 interface
 
-uses UClasseCombustivel;
+uses
+  FireDAC.Comp.Client, uConexaoBD, System.SysUtils, UClasseCombustivel;
 
 type
-   TDAOCombustivel = class
+  TDAOCombustivel = class
+  private
+    FConexao: TConexao;
+  public
+    constructor Create;
 
-   private
-
-   public
-     procedure Salvar(const objetoCliente: TCombustivel);
-
-   end;
+    function Incluir(objCombustivel: TCombustivel): Boolean;
+    function Alterar(objCombustivel: TCombustivel): Boolean;
+    function Excluir(objCombustivel: TCombustivel): Boolean;
+    function Consultar: TFDQuery;
+  end;
 
 implementation
 
-{ TDAOCombustível }
+{ TClienteDao }
 
-procedure TDAOCombustivel.Salvar(const objetoCliente: TCombustivel);
+uses uControllerSistema;
+
+function TDAOCombustivel.Alterar(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
 begin
-  //Escrever rotina para salvar no banco de dados, usar FIREDAC
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('update combustivel set desc_combustivel = :desc_combustivel, preco_combustivel = :preco_combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco, objCombustivel.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+constructor TDAOCombustivel.Create;
+begin
+  FConexao := TSistemaControl.GetInstance().Conexao;
+end;
+
+function TDAOCombustivel.Excluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('delete from combustivel where (id_combustivel = :id_combustivel)', [objCombustivel.ID]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Incluir(objCombustivel: TCombustivel): Boolean;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  try
+    VQry.ExecSQL('insert into combustivel (desc_combustivel, preco_combustivel) values (:desc_combustivel, :preco_combustivel)', [objCombustivel.Descricao, objCombustivel.Preco]);
+    Result := True;
+  finally
+    VQry.Free;
+  end;
+end;
+
+function TDAOCombustivel.Consultar: TFDQuery;
+var VQry: TFDQuery;
+begin
+  VQry := FConexao.CriarQuery();
+  VQry.Open('select id_combustivel, desc_combustivel, preco_combustivel from combustivel order by 1');
+  Result := VQry;
 end;
 
 end.
+
+
+
