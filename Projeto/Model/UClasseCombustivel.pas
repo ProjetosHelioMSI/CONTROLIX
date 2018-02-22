@@ -2,6 +2,8 @@ unit UClasseCombustivel;
 
 interface
 
+uses uEnumerado;
+
 type
    TCombustivel = class
 
@@ -10,6 +12,7 @@ type
      AID : ShortInt;
      ADescricao : String;
      APreco : Double;
+     FAcao: TAcao;
 
    public
      //Metódos Públicos
@@ -19,6 +22,7 @@ type
      property ID: ShortInt read AID write AID;
      property Descricao: string read ADescricao write ADescricao;
      property Preco: Double read APreco write APreco;
+     property Acao: TAcao read FAcao write FAcao;
    end;
 
 implementation

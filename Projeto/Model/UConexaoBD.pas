@@ -22,7 +22,7 @@ type
   end;
 
   const
-    PATH_BANCO: string = 'C:\CONTROLIX\BancoDados';
+    Banco: string = 'C:\CONTROLIX\BancoDados\DBCONTROLIX.FDB';
 
 implementation
 
@@ -31,8 +31,8 @@ implementation
 procedure TConexao.ConfigurarConexao;
 begin
   FConn.Params.Add('DriverID=FB');
-  FConn.Params.Add('DataBase='+PATH_BANCO);
-  FConn.Params.Add('UserName=SYSDBA');
+  FConn.Params.Add('DataBase='+Banco);
+  FConn.Params.Add('User_Name=SYSDBA');
   FConn.Params.Add('Password=MSI123');
   FConn.LoginPrompt := False;
 end;

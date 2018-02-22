@@ -13,32 +13,37 @@ type
 
   public
     //procedimentos publicos pra salvar
-    procedure Salvar(const objetoCliente: TCombustivel);
+    procedure Salvar(const objetoCombustivel: TCombustivel);
 
   end;
 
 implementation
 
 uses
-  StrUtils, SysUtils;
+  StrUtils, SysUtils, UEnumerado;
 
 { TControleCombustivel }
 
-procedure TControleCombustivel.Salvar(const objetoCliente: TCombustivel);
+procedure TControleCombustivel.Salvar(const objetoCombustivel: TCombustivel);
 var
   objetoDAOCombustivel : TDAOCombustivel;
 begin
   objetoDAOCombustivel := TDAOCombustivel.Create;
   try
     {utilizei exceções para abortar a instrução mas correto um tratamento utilizando try..except, mais amigável.}
-    if objetoCliente.Descricao= '' then
+    if objetoCombustivel.Descricao = '' then
        raise Exception.Create('Preencha a Descrição do Combustível!');
 
     //Exemplo
     //if not (ValidarCPF(objetoCliente.CPF)) then
     //   raise Exception.Create('CPF inválido!');
 
-    objetoDAOCombustivel.Salvar(objetoCliente);
+    case objetoCombustivel.Acao of
+      uEnumerado.tacInc: objetoDAOCombustivel.Incluir(objetoCombustivel);
+      uEnumerado.tacAlt: objetoDAOCombustivel.Alterar(objetoCombustivel);
+      uEnumerado.tacExc: objetoDAOCombustivel.Excluir(objetoCombustivel);
+    end;
+
   finally
     FreeAndNil(objetoDAOCombustivel);
   end;

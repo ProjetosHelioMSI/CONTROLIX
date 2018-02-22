@@ -15,6 +15,7 @@ type
     Label2: TLabel;
     cxCEPreco: TcxCurrencyEdit;
     procedure FormShow(Sender: TObject);
+    procedure BBOKClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,7 +29,34 @@ implementation
 
 {$R *.dfm}
 
-uses UDMBanco;
+uses UDMBanco, UClasseCombustivel, UControllerCombustivel, UEnumerado;
+
+procedure TFDadosCombustivel.BBOKClick(Sender: TObject);
+var objClasse: TCombustivel;
+    objControle: TControleCombustivel;
+begin
+  inherited;
+
+  objClasse := TCombustivel.Create;
+  objControle := TControleCombustivel.Create;
+  try
+    objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
+    objClasse.Descricao := Trim(EDesc.Text);
+    objClasse.Preco := cxCEPreco.Value;
+    case DMBanco.pOperacaoDados of
+       1: objClasse.Acao := uEnumerado.tacInc;
+       2: objClasse.Acao := uEnumerado.tacAlt;
+       3: objClasse.Acao := uEnumerado.tacExc;
+    end;
+
+    objControle.Salvar(objClasse);
+  finally
+    FreeAndNil(objClasse);
+    FreeAndNil(objControle);
+    DMBanco.FDQCombustivel.Refresh;
+  end;
+
+end;
 
 procedure TFDadosCombustivel.FormShow(Sender: TObject);
 begin

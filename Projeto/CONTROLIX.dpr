@@ -28,7 +28,8 @@ uses
   URelAbastecimentos in 'View\Relatorios\URelAbastecimentos.pas' {FRelAbastecimentos},
   UDadosRelAbastecimento in 'View\Relatorios\UDadosRelAbastecimento.pas' {FDadosRelatorioAbastecimento},
   UConexaoBD in 'Model\UConexaoBD.pas',
-  UControllerSistema in 'Controller\UControllerSistema.pas';
+  UControllerSistema in 'Controller\UControllerSistema.pas',
+  UEnumerado in 'Model\UEnumerado.pas';
 
 {$R *.res}
 

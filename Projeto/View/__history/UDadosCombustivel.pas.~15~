@@ -1,0 +1,81 @@
+unit UDadosCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UDados, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit;
+
+type
+  TFDadosCombustivel = class(TFDados)
+    Label1: TLabel;
+    EDesc: TEdit;
+    Label2: TLabel;
+    cxCEPreco: TcxCurrencyEdit;
+    procedure FormShow(Sender: TObject);
+    procedure BBOKClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDadosCombustivel: TFDadosCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+uses UDMBanco, UClasseCombustivel, UControllerCombustivel, UEnumerado;
+
+procedure TFDadosCombustivel.BBOKClick(Sender: TObject);
+var objClasse: TCombustivel;
+    objControle: TControleCombustivel;
+begin
+  inherited;
+
+  objClasse := TCombustivel.Create;
+  objControle := TControleCombustivel.Create;
+  try
+    objClasse.ID := DMBanco.FDQCombustivelID_COMBUSTIVEL.AsInteger;
+    objClasse.Descricao := Trim(EDesc.Text);
+    objClasse.Preco := cxCEPreco.Value;
+    case DMBanco.pOperacaoDados of
+       1: objClasse.Acao := uEnumerado.tacInc;
+       2: objClasse.Acao := uEnumerado.tacAlt;
+       3: objClasse.Acao := uEnumerado.tacExc;
+    end;
+
+    objControle.Salvar(objClasse);
+  finally
+    FreeAndNil(objClasse);
+    FreeAndNil(objControle);
+  end;
+end;
+
+procedure TFDadosCombustivel.FormShow(Sender: TObject);
+begin
+  inherited;
+  EDesc.ReadOnly := False;
+  cxCEPreco.Properties.ReadOnly  := False;
+  if DMBanco.pOperacaoDados = 1 then
+  begin
+    EDesc.Clear;
+    cxCEPreco.Clear;
+  end
+  else
+  begin
+    EDesc.Text := DMBanco.FDQCombustivelDESC_COMBUSTIVEL.AsString;
+    cxCEPreco.Value := DMBanco.FDQCombustivelPRECO_COMBUSTIVEL.AsFloat;
+    if DMBanco.pOperacaoDados = 3 then
+    begin
+      EDesc.ReadOnly := True;
+      cxCEPreco.Properties.ReadOnly := True;
+    end;
+  end;
+end;
+
+end.

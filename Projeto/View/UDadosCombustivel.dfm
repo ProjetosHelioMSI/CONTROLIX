@@ -37,6 +37,9 @@ inherited FDadosCombustivel: TFDadosCombustivel
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
+      Cancel = True
+      Kind = bkCustom
+      OnClick = BBOKClick
     end
     inherited BBCancelar: TBitBtn
       Margins.Left = 4
