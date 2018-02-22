@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/02/21 22:51:35.000.716,=C:\CONTROLIX\Projeto\Test\TestUDadosAbastecimento.pas</Transaction>
+    <Transaction>2018/02/21 22:51:43.000.523,=C:\CONTROLIX\Projeto\View\UDadosAbastecimento.pas</Transaction>
+    <Transaction>2018/02/22 08:21:35.228,C:\CONTROLIX\Projeto\View\UDadosAbastecimento.pas=</Transaction>
+    <Transaction>2018/02/22 08:21:39.563,C:\CONTROLIX\Projeto\Test\TestUDadosAbastecimento.pas=</Transaction>
+    <Transaction>2018/02/22 08:23:55.086,=C:\CONTROLIX\Projeto\Test\TestUClasseAbastecimento.pas</Transaction>
+    <Transaction>2018/02/22 08:23:55.860,=C:\CONTROLIX\Projeto\Model\UClasseAbastecimento.pas</Transaction>
+  </Transactions>
+</BorlandProject>

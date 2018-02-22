@@ -1,0 +1,5 @@
+inherited FViewBase1: TFViewBase1
+  Caption = 'FViewBase1'
+  PixelsPerInch = 96
+  TextHeight = 13
+end

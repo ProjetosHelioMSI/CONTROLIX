@@ -1,0 +1,14 @@
+inherited FViewAbastecimento: TFViewAbastecimento
+  Left = 316
+  Top = 176
+  Caption = 'Abastecimentos'
+  ExplicitLeft = 316
+  ExplicitTop = 176
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited BBIncluir: TBitBtn
+      OnClick = BBIncluirClick
+    end
+  end
+end

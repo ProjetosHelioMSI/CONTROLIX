@@ -1,0 +1,25 @@
+unit UViewImposto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UView, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TFViewBase1 = class(TFViewBase)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FViewBase1: TFViewBase1;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,20 @@
+unit UDAOCombustivel;
+
+interface
+
+uses UClasseCombustivel;
+
+type
+  TControleCombustivel = class
+
+  private
+    //funções privadas pra validar algo
+
+  public
+    //procedimentos pra salvar
+
+  end;
+
+implementation
+
+end.

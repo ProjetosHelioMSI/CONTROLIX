@@ -1,0 +1,102 @@
+unit UViewTelaPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, cxGraphics, cxControls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins,
+  dxRibbonCustomizationForm, dxBar, Vcl.ImgList, cxClasses, dxRibbon,
+  dxRibbonBackstageView, dxGDIPlusClasses, Vcl.ExtCtrls;
+
+type
+  TFViewTelaPrincipal = class(TForm)
+    StatusBar1: TStatusBar;
+    ImageList: TImageList;
+    cxILImageGrande: TcxImageList;
+    dxBarManager: TdxBarManager;
+    dxBMBLancamentos: TdxBar;
+    dxBarCalculo: TdxBar;
+    dxBarConsultas: TdxBar;
+    dxBarMMenu: TdxBar;
+    dxBarSeparator1: TdxBarSeparator;
+    dxBLBAbastecimento: TdxBarLargeButton;
+    dxBLBCombustivel: TdxBarLargeButton;
+    dxBLBTributacao: TdxBarLargeButton;
+    dxBLBBombas: TdxBarLargeButton;
+    dxBarBUsuario: TdxBarButton;
+    dxBarBConfiguracoes: TdxBarButton;
+    dxBarBLogOff: TdxBarButton;
+    dxBarBSair: TdxBarButton;
+    dxRibbon1: TdxRibbon;
+    dxRibbon1Tab2: TdxRibbonTab;
+    dxRibbonBackstageView1: TdxRibbonBackstageView;
+    dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet;
+    dxBMBRelatorios: TdxBar;
+    dxBLBRelatorio: TdxBarLargeButton;
+    Image1: TImage;
+    Image2: TImage;
+    procedure dxBarBSairClick(Sender: TObject);
+    procedure dxBLBAbastecimentoClick(Sender: TObject);
+    procedure dxBLBCombustivelClick(Sender: TObject);
+    procedure dxBLBBombasClick(Sender: TObject);
+    procedure dxBLBTributacaoClick(Sender: TObject);
+    procedure dxBLBRelatorioClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure CriarForm(const Classe: TFormClass);
+  public
+    { Public declarations }
+  end;
+
+var
+  FViewTelaPrincipal: TFViewTelaPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses UViewAbastecimento, UViewBomba, UViewCombustivel, UViewImposto,
+  UDadosImposto, UDadosRelAbastecimento;
+
+procedure TFViewTelaPrincipal.CriarForm(const Classe: TFormClass);
+begin
+  with Classe.Create(Application) do
+  try
+    ShowModal;
+  finally
+    Free;
+  end;
+end;
+
+procedure TFViewTelaPrincipal.dxBarBSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TFViewTelaPrincipal.dxBLBAbastecimentoClick(Sender: TObject);
+begin
+  CriarForm(TFViewAbastecimento);
+end;
+
+procedure TFViewTelaPrincipal.dxBLBBombasClick(Sender: TObject);
+begin
+  CriarForm(TFViewBomba);
+end;
+
+procedure TFViewTelaPrincipal.dxBLBCombustivelClick(Sender: TObject);
+begin
+  CriarForm(TFViewCombustivel);
+end;
+
+procedure TFViewTelaPrincipal.dxBLBRelatorioClick(Sender: TObject);
+begin
+  CriarForm(TFDadosRelatorioAbastecimento);
+end;
+
+procedure TFViewTelaPrincipal.dxBLBTributacaoClick(Sender: TObject);
+begin
+  CriarForm(TFDadosImposto);
+end;
+
+end.

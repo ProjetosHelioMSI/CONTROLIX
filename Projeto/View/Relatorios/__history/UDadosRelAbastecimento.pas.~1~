@@ -1,0 +1,29 @@
+unit UDadosRelAbastecimento;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UDados, Vcl.StdCtrls, Vcl.ComCtrls,
+  Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TFDadosRelatorioAbastecimento = class(TFDados)
+    DateTimePicker1: TDateTimePicker;
+    Label1: TLabel;
+    Label2: TLabel;
+    DateTimePicker2: TDateTimePicker;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDadosRelatorioAbastecimento: TFDadosRelatorioAbastecimento;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,50 @@
+inherited FViewBomba: TFViewBomba
+  Caption = 'Cadastro das Bombas'
+  ExplicitWidth = 606
+  ExplicitHeight = 451
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited BBIncluir: TBitBtn
+      OnClick = BBIncluirClick
+    end
+    inherited BBAlterar: TBitBtn
+      OnClick = BBAlterarClick
+    end
+    inherited BBExcluir: TBitBtn
+      OnClick = BBExcluirClick
+      ExplicitLeft = 6
+      ExplicitTop = 123
+    end
+  end
+  inherited DBGrid1: TDBGrid
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_BOMBA'
+        Width = 46
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DESC_BOMBA'
+        Width = 208
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TANQUE_BOMBA'
+        Width = 99
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'COMBUSTIVEL_BOMBA'
+        Width = 113
+        Visible = True
+      end>
+  end
+  inherited DSView: TDataSource
+    DataSet = DMBanco.FDQBomba
+  end
+end

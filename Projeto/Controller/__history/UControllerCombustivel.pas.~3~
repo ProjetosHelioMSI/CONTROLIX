@@ -1,0 +1,27 @@
+unit UControllerCombustivel;
+
+interface
+
+uses UClasseCombustivel, UDAOCombustivel;
+
+type
+  TControleCombustivel = class
+
+  private
+    //funções privadas pra validar algo, código do CPF por exemplo
+
+  public
+    //procedimentos publicos pra salvar
+
+
+
+  end;
+
+implementation
+
+uses
+  StrUtils, SysUtils;
+
+
+
+end.

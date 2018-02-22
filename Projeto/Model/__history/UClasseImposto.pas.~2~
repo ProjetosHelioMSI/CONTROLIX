@@ -1,0 +1,36 @@
+unit UClasseImposto;
+
+interface
+
+type
+   TImposto = class
+
+   private
+     //Atributos da Classe
+     AID : ShortInt;
+     ADescricao : String;
+     AAliquota : Double;
+
+   public
+     //Metódos Públicos
+     constructor Create;
+
+     //Propriedades (semelhante ao get and set)
+     property ID: ShortInt read AID write AID;
+     property Descricao: string read ADescricao write ADescricao;
+     property Aliquota: Double read AAliquota write AAliquota;
+   end;
+
+implementation
+
+uses
+  SysUtils;
+
+constructor TCombustivel.Create;
+begin
+  //Inicialização valores ao objeto
+  ADescricao := '';
+  APreco := 0;
+end;
+
+end.

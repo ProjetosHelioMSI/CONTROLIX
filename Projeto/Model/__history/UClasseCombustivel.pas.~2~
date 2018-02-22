@@ -1,0 +1,28 @@
+unit UClasseCombustivel;
+
+interface
+
+uses Dialogs;
+
+type
+   TCombustivel = class
+
+   private
+     //Atributos da Classe
+     AID : integer;
+     ADescricao : String;
+     APreco : Double;
+
+   public
+     //Metódos Públicos
+     constructor Create;
+
+     //Propriedades (semelhante aos getters and setters)
+     property ID: integer read AID write AID;
+     property Descricao: string read ADescricao write ADescricao;
+     property Preco: string read APreco write APreco;
+   end;
+
+implementation
+
+end.

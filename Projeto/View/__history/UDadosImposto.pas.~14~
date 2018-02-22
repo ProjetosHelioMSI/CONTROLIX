@@ -1,0 +1,65 @@
+unit UDadosImposto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UDados, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, Vcl.Mask, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit;
+
+type
+  TFDadosImposto = class(TFDados)
+    Label2: TLabel;
+    Label3: TLabel;
+    cxCEAliquota: TcxCurrencyEdit;
+    procedure EAliquotaKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+    procedure BBOKClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDadosImposto: TFDadosImposto;
+
+implementation
+
+uses IniFiles, IWSystem;
+
+{$R *.dfm}
+
+procedure TFDadosImposto.BBOKClick(Sender: TObject);
+var ArquivoINI: TIniFile;
+begin
+  inherited;
+  try
+    ArquivoINI := TIniFile.Create('C:\Configuracao.ini');
+    ArquivoINI.WriteString('Aliquotas', '1', cxCEAliquota.Text);
+  finally
+    ArquivoINI.Free;
+  end;
+end;
+
+procedure TFDadosImposto.EAliquotaKeyPress(Sender: TObject; var Key: Char);
+begin
+  inherited;
+  if not (Key in [chr(VK_BACK), '0'..'9', ',']) then
+     key:=#0;
+end;
+
+procedure TFDadosImposto.FormShow(Sender: TObject);
+var ArquivoINI: TIniFile;
+begin
+  inherited;
+  try
+    ArquivoINI := TIniFile.Create(gsAppPath+'\Impostos.ini');
+    ArquivoINI.ReadString('Aliquotas', '1', '13,00');
+  finally
+    ArquivoINI.Free;
+  end;
+end;
+
+end.

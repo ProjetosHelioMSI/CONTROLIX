@@ -1,0 +1,47 @@
+unit UControllerCombustivel;
+
+interface
+
+uses UClasseCombustivel, UDAOCombustivel;
+
+type
+  TControleCombustivel = class
+
+  private
+    //funções privadas pra validar algo, um código, CPF por exemplo
+    //function ValidarCPF(numCPF: string): boolean;
+
+  public
+    //procedimentos publicos pra salvar
+    procedure Salvar(const objetoCliente: TCombustivel);
+
+  end;
+
+implementation
+
+uses
+  StrUtils, SysUtils;
+
+{ TControleCombustivel }
+
+procedure TControleCombustivel.Salvar(const objetoCliente: TCombustivel);
+var
+  objetoDAOCombustivel : TDAOCombustivel;
+begin
+  objetoDAOCombustivel := TDAOCombustivel.Create;
+  try
+    {utilizei exceções para abortar a instrução mas correto um tratamento utilizando try..except, mais amigável.}
+    if objetoCliente.Descricao= '' then
+       raise Exception.Create('Preencha a Descrição do Combustível');
+
+    //Exemplo
+    //if not (ValidarCPF(objetoCliente.CPF)) then
+    //   raise Exception.Create('CPF inválido!');
+
+    objetoDAOCombustivel.Salvar(objetoCliente);
+  finally
+    FreeAndNil(objetoDAOCombustivel);
+  end;
+end;
+
+end.

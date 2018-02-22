@@ -1,0 +1,39 @@
+unit UControllerBomba;
+
+interface
+
+uses UClasseBomba, UDAOBomba;
+
+type
+  TControleBomba = class
+
+  private
+
+  public
+    procedure Salvar(const objetoCliente: TBomba);
+
+  end;
+
+implementation
+
+uses
+  StrUtils, SysUtils;
+
+{ TControleCombustivel }
+
+procedure TControleBomba.Salvar(const objetoCliente: TBomba);
+var
+  objetoDAOBomba : TDAOBomba;
+begin
+  objetoDAOBomba := TDAOBomba.Create;
+  try
+    if objetoCliente.Descricao= '' then
+       raise Exception.Create('Preencha a Descrição do Combustível');
+
+    objetoDAOBomba.Salvar(objetoCliente);
+  finally
+    FreeAndNil(objetoDAOBomba);
+  end;
+end;
+
+end.

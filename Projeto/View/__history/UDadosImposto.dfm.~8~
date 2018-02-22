@@ -1,0 +1,57 @@
+inherited FDadosImposto: TFDadosImposto
+  Left = 360
+  Top = 260
+  Caption = 'Cadastro da Al'#237'quota do Imposto'
+  ClientHeight = 159
+  ClientWidth = 407
+  ExplicitLeft = 360
+  ExplicitTop = 260
+  ExplicitWidth = 423
+  ExplicitHeight = 198
+  PixelsPerInch = 96
+  TextHeight = 19
+  object Label1: TLabel [0]
+    Left = 103
+    Top = 59
+    Width = 16
+    Height = 19
+    Caption = '%'
+  end
+  inherited PRodape: TPanel
+    Top = 118
+    Width = 407
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
+    ExplicitTop = 225
+    ExplicitWidth = 766
+    inherited BBOK: TBitBtn
+      Left = 299
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      ExplicitLeft = 299
+    end
+    inherited BBCancelar: TBitBtn
+      Left = 194
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
+      ExplicitLeft = 194
+    end
+  end
+  object LabeledEdit1: TLabeledEdit
+    Left = 32
+    Top = 56
+    Width = 65
+    Height = 27
+    EditLabel.Width = 146
+    EditLabel.Height = 19
+    EditLabel.Caption = 'Al'#237'quota do Imposto'
+    TabOrder = 1
+    OnKeyPress = LabeledEdit1KeyPress
+  end
+end

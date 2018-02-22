@@ -1,0 +1,50 @@
+object FDados: TFDados
+  Left = 254
+  Top = 259
+  BorderIcons = [biSystemMenu]
+  Caption = 'Dados'
+  ClientHeight = 308
+  ClientWidth = 523
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object PRodape: TPanel
+    Left = 0
+    Top = 267
+    Width = 523
+    Height = 41
+    Align = alBottom
+    Color = clSilver
+    ParentBackground = False
+    TabOrder = 0
+    ExplicitLeft = 160
+    ExplicitTop = 200
+    ExplicitWidth = 185
+    object BBOK: TBitBtn
+      Left = 427
+      Top = 5
+      Width = 82
+      Height = 31
+      Kind = bkOK
+      NumGlyphs = 2
+      TabOrder = 0
+    end
+    object BBCancelar: TBitBtn
+      Left = 333
+      Top = 5
+      Width = 82
+      Height = 31
+      Caption = 'Cancelar'
+      Kind = bkCancel
+      NumGlyphs = 2
+      TabOrder = 1
+    end
+  end
+end

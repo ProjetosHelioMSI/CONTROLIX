@@ -1,0 +1,10 @@
+inherited FViewBomba: TFViewBomba
+  Caption = 'Cadastro das Bombas'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    inherited BBIncluir: TBitBtn
+      OnClick = BBIncluirClick
+    end
+  end
+end

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AEAFC5B6-5BDA-4AB1-AA42-F4871BF394F5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Projeto\CONTROLIX.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Projeto\Test\CONTROLIXTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CONTROLIX">
+        <MSBuild Projects="Projeto\CONTROLIX.dproj"/>
+    </Target>
+    <Target Name="CONTROLIX:Clean">
+        <MSBuild Projects="Projeto\CONTROLIX.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CONTROLIX:Make">
+        <MSBuild Projects="Projeto\CONTROLIX.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CONTROLIXTests">
+        <MSBuild Projects="Projeto\Test\CONTROLIXTests.dproj"/>
+    </Target>
+    <Target Name="CONTROLIXTests:Clean">
+        <MSBuild Projects="Projeto\Test\CONTROLIXTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CONTROLIXTests:Make">
+        <MSBuild Projects="Projeto\Test\CONTROLIXTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CONTROLIX;CONTROLIXTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CONTROLIX:Clean;CONTROLIXTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CONTROLIX:Make;CONTROLIXTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

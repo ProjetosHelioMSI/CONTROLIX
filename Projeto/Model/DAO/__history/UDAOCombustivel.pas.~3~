@@ -1,0 +1,26 @@
+unit UDAOCombustivel;
+
+interface
+
+uses UClasseCombustivel;
+
+type
+   TDAOCombustível = class
+
+   private
+
+   public
+     procedure Salvar(const objetoCliente: TCombustivel);
+
+   end;
+
+implementation
+
+{ TDAOCombustível }
+
+procedure TDAOCombustível.Salvar(const objetoCliente: TCombustivel);
+begin
+
+end;
+
+end.

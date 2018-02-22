@@ -1,0 +1,26 @@
+unit UDAOImposto;
+
+interface
+
+uses UClasseImposto;
+
+type
+   TDAOImposto = class
+
+   private
+
+   public
+     procedure Salvar(const objetoCliente: TImposto);
+
+   end;
+
+implementation
+
+{ TDAOCombustível }
+
+procedure TDAOImposto.Salvar(const objetoCliente: TDAOImposto);
+begin
+  //Escrever rotina para salvar no banco de dados, usar FIREDAC
+end;
+
+end.

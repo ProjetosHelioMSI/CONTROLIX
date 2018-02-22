@@ -1,0 +1,111 @@
+inherited FViewAbastecimento: TFViewAbastecimento
+  Left = 241
+  Top = 191
+  Caption = 'Abastecimentos'
+  ClientWidth = 898
+  ExplicitLeft = 241
+  ExplicitTop = 191
+  ExplicitWidth = 914
+  ExplicitHeight = 451
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Left = 812
+    inherited BBIncluir: TBitBtn
+      OnClick = BBIncluirClick
+    end
+    inherited BBAlterar: TBitBtn
+      OnClick = BBAlterarClick
+    end
+    inherited BBExcluir: TBitBtn
+      OnClick = BBExcluirClick
+    end
+  end
+  inherited DBGrid1: TDBGrid
+    Width = 812
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_ABASTECIMENTO'
+        Width = 54
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DATA_ABASTECIMENTO'
+        Width = 124
+        Visible = True
+      end
+      item
+        Color = 13303754
+        Expanded = False
+        FieldName = 'LITROS_ABASTECIMENTO'
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Litros '
+        Width = 79
+        Visible = True
+      end
+      item
+        Color = 14671871
+        Expanded = False
+        FieldName = 'VALOR_ABASTECIMENTO'
+        Title.Alignment = taRightJustify
+        Width = 75
+        Visible = True
+      end
+      item
+        Color = 15066597
+        Expanded = False
+        FieldName = 'IMPOSTO_ABASTECIMENTO'
+        Title.Alignment = taRightJustify
+        Width = 70
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'BOMBA_ABASTECIMENTO'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_BOMBA'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'DESC_BOMBA'
+        Width = 69
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TANQUE_BOMBA'
+        Width = 78
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'COMBUSTIVEL_BOMBA'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_COMBUSTIVEL'
+        Visible = False
+      end
+      item
+        Expanded = False
+        FieldName = 'DESC_COMBUSTIVEL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PRECO_COMBUSTIVEL'
+        Title.Alignment = taRightJustify
+        Visible = True
+      end>
+  end
+  inherited DSView: TDataSource
+    DataSet = DMBanco.FDQAbastecimento
+  end
+end

@@ -1,0 +1,41 @@
+unit UControllerCombustivel;
+
+interface
+
+uses UClasseCombustivel, UDAOCombustivel;
+
+type
+  TControleCombustivel = class
+
+  private
+    //funções privadas pra validar algo, código do CPF por exemplo
+
+  public
+    //procedimentos publicos pra salvar
+    procedure Salvar(const objetoCliente: TCombustivel);
+
+
+  end;
+
+implementation
+
+uses
+  StrUtils, SysUtils;
+
+{ TControleCombustivel }
+
+procedure TControleCombustivel.Salvar(const objetoCliente: TCombustivel);
+var
+  objetoDAOCombustivel : TDAOCombustível;
+begin
+  objetoDAOCombustivel := TDAOCombustível.Create;
+  try
+
+    objetoDAOCombustivel.Salvar(objetoCliente);
+  finally
+    FreeAndNil(objetoDAOCombustivel);
+  end;
+
+end;
+
+end.

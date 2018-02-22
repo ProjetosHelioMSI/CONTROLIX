@@ -1,0 +1,25 @@
+unit UDadosCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UDados, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls;
+
+type
+  TFDados1 = class(TFDados)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDados1: TFDados1;
+
+implementation
+
+{$R *.dfm}
+
+end.

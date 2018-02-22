@@ -1,0 +1,30 @@
+unit UDadosCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UDados, Vcl.StdCtrls, Vcl.Buttons,
+  Vcl.ExtCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, cxTextEdit, cxCurrencyEdit;
+
+type
+  TFDadosCombustivel = class(TFDados)
+    Label1: TLabel;
+    EDesc: TEdit;
+    Label2: TLabel;
+    cxCEPreco: TcxCurrencyEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FDadosCombustivel: TFDadosCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+end.

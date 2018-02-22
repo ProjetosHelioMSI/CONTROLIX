@@ -1,0 +1,26 @@
+unit UDAOBomba;
+
+interface
+
+uses UClasseBomba;
+
+type
+   TDAOCombustível = class
+
+   private
+
+   public
+     procedure Salvar(const objetoCliente: TCombustivel);
+
+   end;
+
+implementation
+
+{ TDAOCombustível }
+
+procedure TDAOCombustível.Salvar(const objetoCliente: TCombustivel);
+begin
+  //Escrever rotina para salvar no banco de dados, usar FIREDAC
+end;
+
+end.
